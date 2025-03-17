@@ -17,5 +17,21 @@ void main() {
       expect(authService.login('', 'password123'), throwsException);
       expect(authService.login('doanvinh@gmail.com', ''), throwsException);
     });
+
+    test('Login with invalid email format throws error', () {
+      expect(authService.login('invalid-email', 'password123'), throwsException);
+    });
+
+    test('Login with short password throws error', () {
+      expect(authService.login('doanvinh@gmail.com', 'short'), throwsException);
+    });
+
+    test('Login with correct email but incorrect password throws error', () {
+      expect(authService.login('doanvinh@gmail.com', 'wrongpassword'), throwsException);
+    });
+
+    test('Login with incorrect email but correct password throws error', () {
+      expect(authService.login('wrongemail@gmail.com', 'password123'), throwsException);
+    });
   });
 }
